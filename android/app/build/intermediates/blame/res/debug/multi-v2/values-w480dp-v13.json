@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/dwikyerl/myProjects/awesome-places/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w480dp-v13/values-w480dp-v13.xml",
+            "map": [
+                {
+                    "source": "/home/dwikyerl/.gradle/caches/transforms-1/files-1.1/appcompat-v7-23.0.1.aar/a5d5b8bce5023cf192499106f7c5b27f/res/values-w480dp/values-w480dp.xml",
+                    "from": {
+                        "startLines": "4,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "282,572",
+                        "endColumns": "61,71",
+                        "endOffsets": "339,639"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,117",
+                        "endColumns": "61,71",
+                        "endOffsets": "112,184"
+                    }
+                }
+            ]
+        }
+    ]
+}
