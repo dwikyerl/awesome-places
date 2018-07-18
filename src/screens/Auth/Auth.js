@@ -17,35 +17,32 @@ import backgroundImage from '@/assets/bg.jpg';
 
 class AuthScreen extends Component {
   state = {
-    respStyles: {
-      pwContainerDirection: 'column',
-      pwContainerJustify: 'flex-start',
-      pwWrapperWidth: '100%'
-    }
+    viewMode: Dimensions.get('window').height > 500 ? 'potrait' : 'landscape'
   }
 
   constructor(props) {
     super(props);
-    Dimensions.addEventListener('change', (dims) => {
-      if (dims.window.height < 500) {
-        this.setState({
-          respStyles: {
-            pwContainerDirection: 'row',
-            pwContainerJustify: 'space-between',
-            pwWrapperWidth: '45%'
-          }
-        });
-      }
-    });
+    Dimensions.addEventListener('change', this.updateStyles);
   }
+
   loginHandler = () => {
     startMainTabs();
+  }
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener('change', this.updateStyles)
+  }
+
+  updateStyles = () => {
+    this.setState({
+      viewMode: Dimensions.get('window').height > 500 ? 'potrait' : 'landscape'
+    })
   }
 
   render() {
     let headingText = null;
 
-    if (Dimensions.get('window').height > 500) {
+    if (this.state.viewMode === 'potrait') {
       headingText = (
         <MainText>
           <HeadingText >Please Log In</HeadingText>
@@ -63,18 +60,23 @@ class AuthScreen extends Component {
           >Switch To Login</ButtonWithBackground>
           <View style={styles.inputContainer} >
             <DefaultInput placeholder="Your e-mail address" style={styles.input} />
-            <View style={{
-              flexDirection: this.state.respStyles.pwContainerDirection,
-              justifyContent: this.state.respStyles.pwContainerJustify
-            }}>
-              <View style={{
-                width: this.state.respStyles.pwWrapperWidth
-              }}>
+            <View style={
+              this.state.viewMode === 'potrait' ? 
+                styles.potraitPasswordContainer :
+                styles.landscapePasswordContainer
+            }>
+              <View style={
+                this.state.viewMode === 'potrait' ? 
+                  styles.potraitPasswordWrapper :
+                  styles.landscapePasswordWrapper
+              }>
                 <DefaultInput placeholder="Password" style={styles.input}/>
               </View>
-              <View style={{
-                width: this.state.respStyles.pwWrapperWidth
-              }}>
+              <View style={
+                this.state.viewMode === 'potrait' ? 
+                  styles.potraitPasswordWrapper :
+                  styles.landscapePasswordWrapper
+              }>
                 <DefaultInput placeholder="Confirm Password" style={styles.input}/>
               </View>
             </View>
@@ -106,12 +108,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
     borderColor: '#bbb'
   },
-  passwordContainer: {
-    flexDirection: Dimensions.get('window').height > 500 ? "column" : "row",
+  landscapePasswordContainer: {
+    flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  passwordWrapper: {
-    width: Dimensions.get('window').height > 500 ? '100%' : '50%'
+  potraitPasswordContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+  landscapePasswordWrapper: {
+    width: '45%'
+  },
+  potraitPasswordWrapper: {
+    width: '100%'
   }
 });
 
