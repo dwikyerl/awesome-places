@@ -17,7 +17,30 @@ import backgroundImage from '@/assets/bg.jpg';
 
 class AuthScreen extends Component {
   state = {
-    viewMode: Dimensions.get('window').height > 500 ? 'potrait' : 'landscape'
+    viewMode: Dimensions.get('window').height > 500 ? 'potrait' : 'landscape',
+    controls: {
+      email: {
+        value: '',
+        valid: false,
+        validationRules: {
+          isEmail: true
+        }
+      },
+      password: {
+        value: '',
+        valid: false,
+        validationRules: {
+          minLength: 6
+        }
+      },
+      confirmPassword:{
+        value: '',
+        valid: false,
+        validationRules: {
+          equalTo: 6
+        }
+      }
+    }
   }
 
   constructor(props) {
@@ -36,6 +59,20 @@ class AuthScreen extends Component {
   updateStyles = () => {
     this.setState({
       viewMode: Dimensions.get('window').height > 500 ? 'potrait' : 'landscape'
+    })
+  }
+
+  updateInputState = (key, value) => {
+    this.setState(prevState => {
+      return {
+        controls: {
+          ...prevState.controls,
+          [key]: {
+            ...prevState.controls[key],
+            value
+          }
+        }
+      }
     })
   }
 
@@ -59,7 +96,12 @@ class AuthScreen extends Component {
             onPress={() => alert('hello')}
           >Switch To Login</ButtonWithBackground>
           <View style={styles.inputContainer} >
-            <DefaultInput placeholder="Your e-mail address" style={styles.input} />
+            <DefaultInput
+              placeholder="Your e-mail address"
+              style={styles.input}
+              value={this.state.controls.email.value}
+              onChangeText={(val) => this.updateInputState('email', val)}
+            />
             <View style={
               this.state.viewMode === 'potrait' ? 
                 styles.potraitPasswordContainer :
@@ -70,14 +112,26 @@ class AuthScreen extends Component {
                   styles.potraitPasswordWrapper :
                   styles.landscapePasswordWrapper
               }>
-                <DefaultInput placeholder="Password" style={styles.input}/>
+                <DefaultInput
+                  placeholder="Password"
+                  style={styles.input}
+                  value={this.state.controls.password.value}
+                  secureTextEntry={true}
+                  onChangeText={(val) => this.updateInputState('password', val)}
+                />
               </View>
               <View style={
                 this.state.viewMode === 'potrait' ? 
                   styles.potraitPasswordWrapper :
                   styles.landscapePasswordWrapper
               }>
-                <DefaultInput placeholder="Confirm Password" style={styles.input}/>
+                <DefaultInput
+                  placeholder="Confirm Password"
+                  style={styles.input}
+                  value={this.state.controls.confirmPassword.value}
+                  secureTextEntry={true}
+                  onChangeText={(val) => this.updateInputState('confirmPassword', val)}
+                  />
               </View>
             </View>
           </View>
