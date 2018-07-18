@@ -213,7 +213,7 @@ class AuthScreen extends Component {
           <ButtonWithBackground
             onPress={this.loginHandler}
             color="#29AAF4"
-            disabled={!this.state.isFormValid}>
+            disabled={false}>
             Submit
           </ButtonWithBackground>
         </KeyboardAvoidingView>

@@ -16,7 +16,8 @@ const reducer = (state = initialState, action) => {
         {
           key,
           name: action.placeName,
-          image: placeImage
+          image: placeImage,
+          location: action.location
         }
       ]
     };

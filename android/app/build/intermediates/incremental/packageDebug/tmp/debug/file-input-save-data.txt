@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Jul 19 05:29:10 WIB 2018
+#Thu Jul 19 06:29:48 WIB 2018
 5.base=/home/dwikyerl/myProjects/awesome-places/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 22.path=fonts/MaterialCommunityIcons.ttf
 32.set=NATIVE_RESOURCE
