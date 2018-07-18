@@ -10,7 +10,8 @@ export default mainText = (props) => {
 const styles = StyleSheet.create({
   mainText: {
     color: '#000',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    margin: 16
   }
 });
 
